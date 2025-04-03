@@ -69,7 +69,7 @@ export const Complex: Story = {
       { id: 'term-002', name: 'Error' },
       { id: 'term-003', name: 'Status' },
     ],
-    width: 240,
+    width: 330,
     height: 180,
     selected: false,
   },

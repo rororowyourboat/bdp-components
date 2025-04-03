@@ -59,15 +59,19 @@ export const Processor: React.FC<ProcessorProps> = ({
   onTerminalClick,
   onProcessorClick,
 }) => {
-  // Calculate spacing for ports and terminals
-  const portSpacing = height / (ports.length + 1);
-  const terminalSpacing = height / (terminals.length + 1);
-  
   // Margins and sizes
   const margin = 10;
   const textMargin = 5;
   const portRadius = 8;
   const fontSize = 12;
+  
+  // Calculate additional space needed for description
+  const descriptionHeight = description ? 30 : 0;
+  const effectiveHeight = height + descriptionHeight;
+  
+  // Calculate spacing for ports and terminals
+  const portSpacing = effectiveHeight / (ports.length + 1);
+  const terminalSpacing = effectiveHeight / (terminals.length + 1);
   
   // Colors
   const backgroundColor = '#f5f5f5';
@@ -79,7 +83,7 @@ export const Processor: React.FC<ProcessorProps> = ({
   return (
     <svg 
       width={width + margin * 2} 
-      height={height + margin * 2} 
+      height={effectiveHeight + margin * 2} 
       className="processor-component"
     >
       {/* Main processor body */}
@@ -87,7 +91,7 @@ export const Processor: React.FC<ProcessorProps> = ({
         x={margin}
         y={margin}
         width={width}
-        height={height}
+        height={effectiveHeight}
         fill={backgroundColor}
         stroke={strokeColor}
         strokeWidth={strokeWidth}
@@ -98,28 +102,60 @@ export const Processor: React.FC<ProcessorProps> = ({
       />
       
       {/* Processor name */}
-      <text
-        x={margin + width / 2}
-        y={margin + 20}
-        textAnchor="middle"
-        fontSize={fontSize + 2}
-        fontWeight="bold"
-        fill="#333"
+      <foreignObject 
+        x={margin + 20} 
+        y={margin} 
+        width={width - 40} 
+        height={25}
       >
-        {name}
-      </text>
+        <div 
+          xmlns="http://www.w3.org/1999/xhtml"
+          style={{
+            fontSize: `${fontSize + 2}px`,
+            fontWeight: 'bold',
+            color: '#333',
+            textAlign: 'center',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          {name}
+        </div>
+      </foreignObject>
       
       {/* Description (if provided) */}
       {description && (
-        <text
-          x={margin + width / 2}
-          y={margin + 40}
-          textAnchor="middle"
-          fontSize={fontSize}
-          fill="#666"
+        <foreignObject 
+          x={margin + 20} 
+          y={margin + 25} 
+          width={width - 40} 
+          height={30}
         >
-          {description.length > 25 ? `${description.substring(0, 25)}...` : description}
-        </text>
+          <div 
+            xmlns="http://www.w3.org/1999/xhtml"
+            style={{
+              fontSize: `${fontSize}px`,
+              color: '#666',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              textAlign: 'center',
+              whiteSpace: 'nowrap',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {description}
+          </div>
+        </foreignObject>
       )}
       
       {/* Ports (inputs) */}
@@ -168,7 +204,7 @@ export const Processor: React.FC<ProcessorProps> = ({
       {/* ID label (small, at bottom for reference) */}
       <text
         x={margin + width / 2}
-        y={margin + height - 10}
+        y={margin + effectiveHeight - 10}
         textAnchor="middle"
         fontSize={fontSize - 2}
         fill="#999"

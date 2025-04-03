@@ -21,8 +21,8 @@ const config: StorybookConfig = {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          'next/image': resolve(__dirname, './mocks/next-image.js'),
-          'next/link': resolve(__dirname, './mocks/next-link.js'),
+          'next/image': resolve(__dirname, './mocks/next-image.jsx'),
+          'next/link': resolve(__dirname, './mocks/next-link.jsx'),
         },
       },
       define: {

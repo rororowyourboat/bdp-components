@@ -1,0 +1,1 @@
+@keyframes dash{to{stroke-dashoffset:-20}}.wire-component .animated-path{animation:dash 1s linear infinite}
