@@ -1,0 +1,142 @@
+import { Meta, Canvas, Story, Controls } from '@storybook/blocks';
+import * as WireStories from './Wire.stories.tsx';
+import { Wire } from './Wire';
+
+<Meta title="BDP/Wire/Documentation" of={WireStories} />
+
+# Wire Component
+
+The Wire component represents a connection between processors in the BDP (Block Diagram Protocol) system. It visualizes data flow between a terminal (output) of one processor and a port (input) of another processor.
+
+## Basic Usage
+
+<Canvas>
+  <Story of={WireStories.Basic} />
+</Canvas>
+
+## Component Structure
+
+The Wire is visually represented as a curved bezier path with the following features:
+
+- Start point (source) typically connects to a processor's terminal
+- End point (target) typically connects to a processor's port
+- Direction indicator (arrow) showing the flow direction
+- Optional label to describe the data being transmitted
+- Different visual styles based on the type of connection
+
+## Variants
+
+### Wire with Label
+
+Add descriptive labels to indicate what data is being transmitted:
+
+<Canvas>
+  <Story of={WireStories.WithLabel} />
+</Canvas>
+
+### Selected Wire
+
+When a wire is selected, it is highlighted with a thicker stroke:
+
+<Canvas>
+  <Story of={WireStories.Selected} />
+</Canvas>
+
+### Wire Types
+
+Wires can have different styles based on their purpose:
+
+#### Diagnostic Wire
+
+Used for diagnostic or monitoring connections, displayed with a dashed orange line:
+
+<Canvas>
+  <Story of={WireStories.Diagnostic} />
+</Canvas>
+
+#### Control Wire
+
+Used for control signals, displayed with a solid purple line:
+
+<Canvas>
+  <Story of={WireStories.Control} />
+</Canvas>
+
+### Animated Wire
+
+Wires can be animated to visualize active data flow:
+
+<Canvas>
+  <Story of={WireStories.Animated} />
+</Canvas>
+
+### Curved Wire
+
+Wires automatically adjust their curve based on the source and target positions:
+
+<Canvas>
+  <Story of={WireStories.Curved} />
+</Canvas>
+
+### Wire Without Arrow
+
+Wires can be displayed without direction indicators if needed:
+
+<Canvas>
+  <Story of={WireStories.WithoutArrow} />
+</Canvas>
+
+### Bidirectional Communication
+
+For bidirectional data flow, you can use two wires in opposite directions:
+
+<Canvas>
+  <Story of={WireStories.Bidirectional} />
+</Canvas>
+
+### Multiple Wires
+
+Different types of wires can be used together in a complex system:
+
+<Canvas>
+  <Story of={WireStories.MultipleWires} />
+</Canvas>
+
+### Direction Indicators
+
+Visual comparison of direction indicators for different wire types:
+
+<Canvas>
+  <Story of={WireStories.DirectionIndicators} />
+</Canvas>
+
+## Props
+
+<Controls of={Wire} />
+
+## Component API
+
+### Connection Points
+
+- `sourceX` and `sourceY`: Coordinates for the start point of the wire
+- `targetX` and `targetY`: Coordinates for the end point of the wire
+
+### Styling Options
+
+- `type`: Determines the wire's appearance ('normal', 'diagnostic', or 'control')
+- `selected`: Highlights the wire when selected
+- `animated`: Adds a flowing animation to indicate active data transfer
+- `showArrow`: Controls whether to display the direction indicator (arrow)
+
+### Interaction
+
+- `onWireClick`: Event handler triggered when the wire is clicked
+
+## Best Practices
+
+1. **Direction Indicators**: Use arrows to clearly show the flow of data between processors
+2. **Color Coding**: Use the appropriate wire type to indicate the nature of the connection
+3. **Labels**: Add clear labels to indicate what data is being transmitted
+4. **Bidirectional Flow**: For bidirectional communication, use separate wires with arrows pointing in opposite directions
+5. **Curve Management**: For complex diagrams, adjust the positions to prevent wires from overlapping
+6. **Animation**: Use animation sparingly to indicate active data flow or highlight important connections

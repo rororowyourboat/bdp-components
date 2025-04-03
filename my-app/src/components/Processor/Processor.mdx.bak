@@ -1,0 +1,104 @@
+import { Meta, Canvas, Story, Controls } from '@storybook/blocks';
+import * as ProcessorStories from './Processor.stories';
+import { Processor } from './Processor';
+
+<Meta title="BDP/Processor/Documentation" of={ProcessorStories} />
+
+# Processor Component
+
+The Processor component is a core building block in the BDP (Block Diagram Protocol) system. It represents a processing element that:
+
+- **Receives data** through its ports (inputs)
+- **Processes data** based on its parent block's behavior
+- **Sends data** through its terminals (outputs)
+- Can be part of a larger **subsystem** with internal mappings
+
+## Basic Usage
+
+<Canvas>
+  <Story of={ProcessorStories.Basic} />
+</Canvas>
+
+## Component Structure
+
+The Processor is visually represented as a rectangle with:
+
+- A title displaying the processor's name
+- An optional description below the title
+- Blue circles on the left side representing ports (inputs)
+- Green circles on the right side representing terminals (outputs)
+- The processor's ID shown at the bottom
+
+## Variants
+
+### Complex Processor
+
+A processor with multiple inputs and outputs:
+
+<Canvas>
+  <Story of={ProcessorStories.Complex} />
+</Canvas>
+
+### Minimal Processor
+
+A simple processor with minimal configuration:
+
+<Canvas>
+  <Story of={ProcessorStories.Minimal} />
+</Canvas>
+
+### Selected Processor
+
+When a processor is selected, it is highlighted with a thicker border:
+
+<Canvas>
+  <Story of={ProcessorStories.Selected} />
+</Canvas>
+
+### Processor with Subsystem
+
+A processor can encapsulate a subsystem with internal mappings:
+
+<Canvas>
+  <Story of={ProcessorStories.WithSubsystem} />
+</Canvas>
+
+## Props
+
+<Controls of={Processor} />
+
+## Component API
+
+### Port and Terminal Interaction
+
+The component supports interaction through click handlers:
+
+- `onPortClick`: Triggered when a port is clicked
+- `onTerminalClick`: Triggered when a terminal is clicked
+- `onProcessorClick`: Triggered when the processor body is clicked
+
+### Customization
+
+The processor appearance can be customized with:
+
+- `width` and `height` to adjust the size
+- `selected` to highlight the processor as selected
+
+### Subsystem Mapping
+
+The `subsystem` prop allows defining how the processor's ports and terminals map to internal processors:
+
+```typescript
+interface Subsystem {
+  systemId: string;
+  portMappings: Array<{ portId: string, processorId: string }>;
+  terminalMappings: Array<{ terminalId: string, processorId: string }>;
+}
+```
+
+## Best Practices
+
+1. **Names**: Use clear, descriptive names for processors, ports, and terminals
+2. **Sizing**: Adjust width and height based on the number of ports and terminals
+3. **Description**: Keep descriptions concise and focused on the processor's purpose
+4. **IDs**: Use consistent ID patterns for easier tracking and debugging
